@@ -2,17 +2,19 @@ const http = require('http');
 const path = require('path');
 const {URL} = require('url');
 
+const bodyParser = require('./helpers/bodyParser');
+
 const routes = require('./routes')
 
 const server = http.createServer( (request, response) => {
 
   const parsedUrl = new URL(`http://localhost:3000${request.url}`);
+  console.log(`Request method: ${request.method}  | Endpoint ${parsedUrl.pathname} `);
   
 
   let { pathname } = parsedUrl;
   let id = null;
   
-  console.log(`Request method: ${request.method}  | Endpoint ${parsedUrl.pathname} `);
 
   const splitEndpoint = pathname.split('/').filter(Boolean);
   
@@ -39,8 +41,11 @@ const server = http.createServer( (request, response) => {
       response.end(JSON.stringify(body));
     }
 
-
-    route.handler(request, response);
+    if(['POST', 'PUT', 'PATCH'].includes(request.method)){
+      bodyParser(request, () => route.handler(request, response))
+    } else{
+      route.handler(request, response);
+    }
   } else {
     response.writeHead(404, {'Content-Type' : 'text/html' });
     response.end(`Cannot ${request.method} ${parsedUrl.pathname}`);
