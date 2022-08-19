@@ -2,7 +2,9 @@
 
 #Modulo 1 do curso do Matheus Silva - JStack
 
-Nesse curso vamos aprender o básico de Node:
+Nesse curso vamos aprender o básico de Node e construir uma api simples.
+
+Conteúdo das aulas:
 
 - Como funciona o Node
 - HTTP e API's REST
@@ -16,3 +18,6 @@ Nesse curso vamos aprender o básico de Node:
 - Capturando o body das requests
 - Criando o helper bodyParser
 - Rotas de  edição de deleção
+
+
+Para este projeto foi utilizado: Insomnia e vsCode.
